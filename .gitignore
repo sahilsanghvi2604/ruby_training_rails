@@ -35,3 +35,4 @@
 node_modules/
 ruby_training/
 .env
+!/.env.example
