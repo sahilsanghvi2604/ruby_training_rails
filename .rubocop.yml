@@ -6,3 +6,134 @@ inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 # # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
 # Layout/SpaceInsideArrayLiteralBrackets:
 #   Enabled: false
+# Checks that assignment expressions are indented consistently.
+Layout/AssignmentIndentation:
+  Enabled: true
+
+# Checks that comments are indented consistently.
+Layout/CommentIndentation:
+  Enabled: true
+
+# Checks for unnecessary consecutive blank lines.
+Layout/EmptyLines:
+  Enabled: true
+
+# Checks that there is a blank line between method definitions.
+Layout/EmptyLineBetweenDefs:
+  Enabled: true
+
+# Checks that the first hash element is indented consistently.
+Layout/FirstHashElementIndentation:
+  Enabled: true
+  EnforcedStyle: consistent
+
+# Checks that indentation is consistent throughout the file.
+Layout/IndentationConsistency:
+  Enabled: true
+  EnforcedStyle: normal
+
+# Checks that indentation uses spaces rather than tabs.
+Layout/IndentationStyle:
+  Enabled: true
+
+# Checks that indentation uses 2 spaces.
+Layout/IndentationWidth:
+  Enabled: true
+  Width: 2
+
+# Checks that rescue and ensure keywords are aligned correctly.
+Layout/RescueEnsureAlignment:
+  Enabled: true
+
+# Checks spacing around block parameters.
+Layout/SpaceAroundBlockParameters:
+  Enabled: true
+
+# Checks spacing before block braces.
+Layout/SpaceBeforeBlockBraces:
+  Enabled: true
+
+# Checks spacing inside block braces.
+Layout/SpaceInsideBlockBraces:
+  Enabled: true
+
+# Checks spacing inside hash literal braces.
+Layout/SpaceInsideHashLiteralBraces:
+  Enabled: true
+
+# Checks that method calls use parentheses when required.
+Lint/RequireParentheses:
+  Enabled: true
+
+# Checks for whitespace at the end of lines.
+Layout/TrailingWhitespace:
+  Enabled: true
+
+# Checks that identifiers contain only ASCII characters.
+Naming/AsciiIdentifiers:
+  Enabled: true
+
+# Checks that class and module names use CamelCase.
+Naming/ClassAndModuleCamelCase:
+  Enabled: true
+
+# Checks that filenames follow Ruby naming conventions.
+Naming/FileName:
+  Enabled: true
+
+# Checks that method names follow Ruby naming conventions.
+Naming/MethodName:
+  Enabled: true
+
+# Checks that predicate method names follow Ruby naming conventions.
+Naming/PredicatePrefix:
+  Enabled: true
+
+# Checks that variable names follow Ruby naming conventions.
+Naming/VariableName:
+  Enabled: true
+
+# Checks whether 'and' and 'or' should be used instead of '&&' and '||'.
+Style/AndOr:
+  Enabled: true
+
+# Checks the style of block delimiters such as do/end and braces.
+Style/BlockDelimiters:
+  Enabled: true
+
+# Checks that hashes use the preferred Ruby hash syntax.
+Style/HashSyntax:
+  Enabled: true
+
+# Checks that large numeric literals use underscores for readability.
+Style/NumericLiterals:
+  Enabled: true
+
+# Block braces:
+# { } used to surround a Ruby block.
+# Eg, users.each { |u| puts u.name }
+
+# Hash literal braces:
+# { } used to create a hash.
+# Example: { name: "Sahil" }
+
+# Whitespace:
+# Spaces or tabs between or around code.
+# Eg name = "Sahil"
+
+# Trailing whitespace:
+# Spaces left at the end of a line.
+# name = "Sahil"   <- spaces after "Sahil"
+
+# Identifier:
+# A name given to something in your code.
+# Eg: user_name
+
+# Block delimiter:
+# Something that marks the beginning and end of a block.
+# Ruby commonly uses { } or do...end for blocks.
+# Example:
+#
+# users.each do |user|
+#   puts user.name
+# end
