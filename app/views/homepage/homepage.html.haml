@@ -1,7 +1,19 @@
-.container.min-vh-100.d-flex.flex-column.justify-content-center.align-items-center
-  %h1.display-4.fw-bold Welcome to Our Application
-  %p.lead.text-muted We are happy to have you here!
+.container.mt-5
+  .row.justify-content-center
+    .col-md-8.text-center
+      .card.shadow-sm.p-5
+        %h1.display-4.fw-bold.mb-3 Welcome to Ruby Training Rails
+        %p.lead.text-muted.mb-4 Secure Authentication System built with Devise
 
-  .mt-4
-    %a.btn.btn-primary.btn-lg.me-2{ href: "#" } Register
-    %a.btn.btn-outline-primary.btn-lg{ href: "#" } Login
+        - if user_signed_in?
+          .alert.alert-success.d-inline-block.px-4.py-2.mb-4
+            %h4.mb-0 Welcome #{current_user.first_name.presence || current_user.email}!
+          
+          .d-flex.justify-content-center.gap-3.mt-3
+            = button_to "Sign Out", destroy_user_session_path, method: :delete, class: "btn btn-danger btn-lg px-4"
+        - else
+          %p.text-secondary.mb-4 Please register or sign in to continue.
+          
+          .d-flex.justify-content-center.gap-3
+            = link_to "Register", new_user_registration_path, class: "btn btn-primary btn-lg px-4"
+            = link_to "Login", new_user_session_path, class: "btn btn-outline-secondary btn-lg px-4"
