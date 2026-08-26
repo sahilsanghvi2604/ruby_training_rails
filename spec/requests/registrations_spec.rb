@@ -48,9 +48,9 @@ RSpec.describe "User Sign Up", type: :request do
   it "successfully registers a user with valid details" do
     valid_data = { user: valid_user_attributes }
 
-    expect {
+    expect do
       post "/users", params: valid_data
-    }.to change(User, :count).by(1)
+    end.to change(User, :count).by(1)
   end
 
   # 2. Invalid Scenario: User should not be created if passwords don't match
@@ -59,8 +59,8 @@ RSpec.describe "User Sign Up", type: :request do
       user: valid_user_attributes.merge(password_confirmation: "wrong_password")
     }
 
-    expect {
+    expect do
       post "/users", params: invalid_data
-    }.not_to change(User, :count)
+    end.not_to change(User, :count)
   end
 end

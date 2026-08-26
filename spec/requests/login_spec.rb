@@ -22,7 +22,6 @@
 
 #     post "/users/sign_in", params: valid_credentials
 
-    
 #     expect(controller.current_user).not_to be_nil
 #   end
 
@@ -38,7 +37,7 @@
 
 #     invalid_credentials = {
 #       user: {
-#         email: "sahil@example.com", 
+#         email: "sahil@example.com",
 #         password: "wrong_password"
 #       }
 #     }
@@ -73,7 +72,7 @@ RSpec.describe "User Sign In", type: :request do
   it "fails to log in with an incorrect password" do
     invalid_credentials = {
       user: {
-        email: user.email, 
+        email: user.email,
         password: "wrong_password"
       }
     }
