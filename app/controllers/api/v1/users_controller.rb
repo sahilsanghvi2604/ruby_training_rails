@@ -1,16 +1,22 @@
+# app/controllers/api/v1/users_controller.rb
 module Api
   module V1
     class UsersController < ApplicationController
-      api :GET, "/api/v1/users", "List all users"
+      before_action :set_user, only: %i[show update destroy]
+
+      api :GET, "/api/v1/users", "List all users with optional filters"
+      param :first_name, String, required: false, desc: "Filter by first name"
+      param :last_name, String, required: false, desc: "Filter by last name"
+      param :email, String, required: false, desc: "Filter by email address"
       def index
-        render json: User.all, status: :ok
+        users = UsersQuery.new(filter_params).call
+        render json: users, status: :ok
       end
 
       api :GET, "/api/v1/users/:id", "Show a user"
       param :id, Integer, required: true, desc: "User ID"
       def show
-        user = User.find(params[:id])
-        render json: user, status: :ok
+        render json: @user, status: :ok
       end
 
       api :POST, "/api/v1/users", "Create a new user"
@@ -30,11 +36,53 @@ module Api
         if outcome.valid?
           render json: outcome.result, status: :created
         else
-          render json: { errors: outcome.errors.full_messages }, status: :unprocessable_entity
+          render json: { errors: outcome.errors.full_messages }, status: :unprocessable_content
+        end
+      end
+
+      api :PUT, "/api/v1/users/:id", "Update an existing user"
+      param :id, Integer, required: true, desc: "User ID"
+      param :user, Hash, required: true do
+        param :first_name, String, desc: "First Name"
+        param :last_name, String, desc: "Last Name"
+        param :email, String, desc: "Email address"
+        param :password, String, desc: "Password"
+        param :password_confirmation, String, desc: "Password Confirmation"
+        param :phone_number, String, desc: "Phone Number"
+        param :age, Integer, desc: "Age"
+        param :date_of_birth, String, desc: "Date of Birth"
+      end
+      def update
+        outcome = Users::UpdateUser.run(user_params.merge(user: @user))
+
+        if outcome.valid?
+          render json: outcome.result, status: :ok
+        else
+          render json: { errors: outcome.errors.full_messages }, status: :unprocessable_content
+        end
+      end
+
+      api :DELETE, "/api/v1/users/:id", "Delete an existing user"
+      param :id, Integer, required: true, desc: "User ID"
+      def destroy
+        outcome = Users::DeleteUser.run(user: @user)
+
+        if outcome.valid?
+          render json: { message: "User deleted successfully" }, status: :ok
+        else
+          render json: { errors: outcome.errors.full_messages }, status: :unprocessable_content
         end
       end
 
       private
+
+      def set_user
+        @user = User.find(params[:id])
+      end
+
+      def filter_params
+        params.permit(:first_name, :last_name, :email)
+      end
 
       def user_params
         params.require(:user).permit(

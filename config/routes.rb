@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   # Versioned API V1 Routes
   namespace :api do
     namespace :v1 do
-      resources :users, only: [ :index, :show, :create ]
+      resources :users, only: [ :index, :show, :create, :update ,:destroy]
     end
   end
 end
